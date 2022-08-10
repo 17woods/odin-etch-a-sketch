@@ -1,0 +1,7 @@
+.hovered {
+    background: "red";
+}
+
+.pixel {
+    transition: background 2s ease-out;
+}
