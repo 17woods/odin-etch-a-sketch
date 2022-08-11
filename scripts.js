@@ -1,10 +1,43 @@
+function create(n) {
+    const container = document.querySelector(".container");
+    container.innerHTML = "";
+
+    for (let i = 0; i < n; i++) {
+        let row = document.createElement('div');
+        row.style.background = "white";
+        row.style.display = "flex";
+
+        container.appendChild(row);
+        for (let i = 0; i < n; i++) {
+            let square = document.createElement('div');
+            square.classList.add("pixel");
+            square.style.background = 'white';
+            square.style.display = "flex";
+            square.style.height = `${512 / n}px`; // 512 is frame size
+            square.style.width = `${512 / n}px`; // change value to change frame size
+
+            row.appendChild(square);
+        }
+    }
+
+    const pixels = document.querySelectorAll(".pixel");
+    pixels.forEach(pixel => pixel.addEventListener('mouseover', colour));
+}
+
 function colour() {
     this.style.background = "red";
     console.log(this);
 }
 
-function removeTransition() {
-    this.style.background = "white";
+function refresh() {
+    const pixels = document.querySelectorAll(".pixel");
+    pixels.forEach((pixel) => pixel.style.background = 'white');
+}
+
+function change() {
+    const n = parseInt(prompt("How many pixels along one axis?"));
+    console.log(n);
+    create(n);
 }
 
 function main() {
@@ -13,37 +46,20 @@ function main() {
     frame.style.padding = "4px";
 
     const container = document.createElement("div");
+    container.classList.add("container");
     frame.appendChild(container);
     container.style.padding = "4px";
     container.style.color = "white";
     container.style.background = "blue";
-    container.style.width = "20em";
+    container.style.width = "32em";
 
-    for (let i = 0; i < 16; i++) {
-        let row = document.createElement('div');
-        row.style.background = "white";
-        row.style.display = "flex";
+    create(16);
 
-        container.appendChild(row);
-        for (let i = 0; i < 16; i++) {
-            let square = document.createElement('div');
-            square.classList.add("pixel");
-            square.style.background = 'white';
-            square.style.display = "flex";
-            square.style.margin = '2px';
-            square.style.height = '16px';
-            square.style.width = '16px';
+    const refreshBtn = document.querySelector(".refresh");
+    refreshBtn.addEventListener("click", refresh);
 
-            row.appendChild(square);
-        }
-    }
-
-    const pixels = document.querySelectorAll(".pixel");
-
-    //pixels.forEach(function(elem) {
-        //elem.addEventListener("mouseover", colour);
-    //}); is the same as
-    pixels.forEach(pixel => pixel.addEventListener('mouseover', colour));
+    const changeBtn = document.querySelector(".change");
+    changeBtn.addEventListener("click", change);
 }
 
 main();
