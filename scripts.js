@@ -35,9 +35,17 @@ function refresh() {
 }
 
 function change() {
-    const n = parseInt(prompt("How many pixels along one axis?"));
-    console.log(n);
-    create(n);
+    while (true) {
+        const n = parseInt(prompt("How many pixels along one axis?"));
+
+        if (n > 128 || n < 1) {
+            alert("Please enter a positive value less than or equal to 128");
+            continue;
+        } else {
+            create(n);
+            break;
+        }
+    }
 }
 
 function main() {
