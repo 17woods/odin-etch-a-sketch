@@ -8,11 +8,16 @@ function removeTransition() {
 }
 
 function main() {
-    const container = document.querySelector(".container");
+    const frame = document.querySelector(".frame");
+    frame.innerHTML = "Etch-A-Sketch";
+    frame.style.padding = "4px";
+
+    const container = document.createElement("div");
+    frame.appendChild(container);
     container.style.padding = "4px";
     container.style.color = "white";
-    container.innerHTML = 'Etch-A-Sketch';
     container.style.background = "blue";
+    container.style.width = "20em";
 
     for (let i = 0; i < 16; i++) {
         let row = document.createElement('div');
@@ -37,10 +42,8 @@ function main() {
 
     //pixels.forEach(function(elem) {
         //elem.addEventListener("mouseover", colour);
-    //});
+    //}); is the same as
     pixels.forEach(pixel => pixel.addEventListener('mouseover', colour));
-    pixels.forEach(pixel => pixel.addEventListener('transitionend', removeTransition));
-
 }
 
 main();
